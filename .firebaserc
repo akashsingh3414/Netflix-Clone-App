@@ -1,0 +1,17 @@
+{
+  "projects": {
+    "default": "netflix-clone-project-9202e",
+    "netflix-clone-project-9202e": "netflix-clone-project-9202e"
+  },
+  "targets": {
+    "netflix-clone-project-9202e": {
+      "hosting": {
+        "site-name": [
+          "default"
+        ]
+      }
+    }
+  },
+  "etags": {},
+  "dataconnectEmulatorConfig": {}
+}
