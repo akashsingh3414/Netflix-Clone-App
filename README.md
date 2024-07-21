@@ -2,9 +2,9 @@ Netflix Clone App
 This project is built with Create React App and utilizes Redux for state management. Follow the steps below to set up and start using the app.
 
 
-Prerequisites
-Node.js and npm installed on your machine.
-A Google Firebase project.
+Prerequisites:
+1. Node.js and npm installed on your machine.
+2. A Google Firebase project.
 
 
 Setup
