@@ -1,5 +1,4 @@
 import React, { useRef } from 'react';
-import { auth, createUserWithEmailAndPassword } from "../hooks/firebase.js";
 import { useNavigate } from 'react-router-dom';
 
 function RegisterUser() {
@@ -11,12 +10,7 @@ function RegisterUser() {
     e.preventDefault();
 
     try {
-      const authUser = await createUserWithEmailAndPassword(
-        auth,
-        emailRef.current.value,
-        passwordRef.current.value
-      );
-      console.log(authUser);
+      console.log('Registered with:', emailRef.current.value, passwordRef.current.value);
       navigate("/");
     } catch (error) {
       alert(error.message);

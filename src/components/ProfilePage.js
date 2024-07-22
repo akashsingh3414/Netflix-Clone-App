@@ -3,10 +3,14 @@ import './ProfilePage.css';
 import Navbar from './Navbar';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../features/userSlice';
-import { auth } from '../hooks/firebase';
 
 function ProfilePage() {
   const user = useSelector(selectUser);
+
+  const handleSignOut = () => {
+    console.log("Sign out");
+    window.location.href = '/login';
+  };
 
   return (
     <>  
@@ -18,10 +22,12 @@ function ProfilePage() {
           <div className="profile-page-details">
             <div className="profile-page-text">
               <h2>Email: {user.email}</h2>
+              <h2>UID: {user.uid}</h2>
+              <h2>Password: {user.password}</h2>
               <h2>Your plan: Basic</h2>
             </div>
             <button
-              onClick={() => auth.signOut()}
+              onClick={handleSignOut}
               className="profile-page-signout"
             >
               Sign Out

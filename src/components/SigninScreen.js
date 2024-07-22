@@ -1,27 +1,47 @@
-import React, { useRef, useState } from 'react';
-import { auth, signInWithEmailAndPassword } from "../hooks/firebase.js";
+import React, { useRef, useState, useEffect } from 'react';
 import './SigninScreen.css';
 import RegisterUser from './RegisterUser.js';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { login } from '../features/userSlice';
 
 function SigninScreen(props) {
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
     const [newUser, setNewUser] = useState(false);
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        if (props.emailID) {
+            emailRef.current.value = props.emailID;
+        }
+    }, [props.emailID]);
 
     const signIn = (e) => {
         e.preventDefault();
-        signInWithEmailAndPassword(
-            auth,
-            emailRef.current.value || props.emailID,
-            passwordRef.current.value
-        )
-        .then((authUser) => {
-            console.log(authUser);
-        })
-        .catch((error) => {
+        try {
+            const email = emailRef.current.value;
+            const password = passwordRef.current.value;
+            
+            const uid = Math.floor(1000 + Math.random() * 9000);
+            console.log('Signed in with:', email);
+    
+            const userAuth = { uid: uid, email: email, password: password };
+            localStorage.setItem('user', JSON.stringify(userAuth));
+    
+            dispatch(login({
+                uid: userAuth.uid,
+                email: userAuth.email,
+                password: userAuth.password,
+            }));
+    
+            navigate("/");
+        } catch (error) {
             alert(error.message);
-        });
+        }
     };
+    
 
     return (
         <div className="SignupScreen">
@@ -32,7 +52,7 @@ function SigninScreen(props) {
                     <h1 className='formTitle'>Sign In</h1>
                     <input 
                         ref={emailRef} 
-                        placeholder={props?.emailID || "Email address"} 
+                        placeholder={props?.emailID || "Email address"}
                         className={`formInput ${props?.emailID ? "placeholder-color" : ""}`} 
                         type="email" 
                         required 

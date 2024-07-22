@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./Navbar.css";
 import { useNavigate } from "react-router-dom";
-import SigninScreen from "./SigninScreen";
 
 export default function Navbar(props) {
     const [show, handleShow] = useState(false);
@@ -37,18 +36,16 @@ export default function Navbar(props) {
         if (props.onLoginPage === true) {
             props.useFunc[1](false);
             navigate("/login");
-        }
-        if (props.onLoginPage !== true) {
-            navigate("/")
+        } else {
+            navigate("/");
         }
     };
 
     const handleSignInClick = () => {
-        if(props.useFunc[0]===false) {
+        if (props.useFunc[0] === false) {
             props.useFunc[1](true);
-            <SigninScreen />
         }
-    }
+    };
 
     return (
         <>
@@ -68,7 +65,7 @@ export default function Navbar(props) {
                             onClick={handleLogoClick}
                         />
 
-                        <div className={`dropdown ${props.onLoginPage === true ? "hidden" : ""}`}>
+                        <div className={`dropdown ${props.onLoginPage ? "hidden" : ""}`}>
                             <button className="dropbtn">Menu</button>
                             <div className="dropdown-content">
                                 <a href="/movies" onClick={(e) => {
@@ -86,17 +83,11 @@ export default function Navbar(props) {
                             </div>
                         </div>
 
-                        <div className={`menu ${props.onLoginPage === true ? "hidden" : ""}`}>
+                        <div className={`menu ${props.onLoginPage ? "hidden" : ""}`}>
                             <ul className="list flex">
-                                <li className={props?.currentPage === "movies" ? "glow" : ""} onClick={() => {
-                                    navigate("/movies")
-                                }}>Movies</li>
-                                <li className={props?.currentPage === "tv-shows" ? "glow" : ""} onClick={() => {
-                                    navigate("/tv-shows")
-                                }}>TV Shows</li>
-                                <li className={props?.currentPage === "top-rated" ? "glow" : ""} onClick={() => {
-                                    navigate("/top-rated")
-                                }}>Top rated</li>
+                                <li className={props?.currentPage === "movies" ? "glow" : ""} onClick={() => navigate("/movies")}>Movies</li>
+                                <li className={props?.currentPage === "tv-shows" ? "glow" : ""} onClick={() => navigate("/tv-shows")}>TV Shows</li>
+                                <li className={props?.currentPage === "top-rated" ? "glow" : ""} onClick={() => navigate("/top-rated")}>Top Rated</li>
                             </ul>
                         </div>
                     </div>
@@ -106,18 +97,21 @@ export default function Navbar(props) {
                             type="text"
                             ref={searchContent}
                             name="search"
-                            className={`searchBox ${props.onLoginPage === true ? "hidden" : ""}`}
+                            className={`searchBox ${props.onLoginPage ? "hidden" : ""}`}
                             placeholder="Search"
                             onKeyDown={handleKeyDown}
                         />
                         <button onClick={handleSearch} className="searchButton">
-                            <span id="search" className={`material-symbols-outlined cursor-pointer start center ${props.onLoginPage === true ? "hidden" : ""}`}>search</span>
+                            <span id="search" className={`material-icons cursor-pointer start center ${props.onLoginPage ? "hidden" : ""}`}>search</span>
                         </button>
-                        <span className={`material-symbols-outlined cursor-pointer ${props.onLoginPage === true ? "hidden" : ""}`}>notifications</span>
-                        <img src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/84c20033850498.56ba69ac290ea.png" alt="Profile" className={`profile-page-image cursor-pointer h-10 w-10 ${(props.onProfilePage === true) || (props.onLoginPage === true) ? "hidden" : ''}`} onClick={() => {
-                            navigate("/profile")
-                        }} />
-                        {<button className={`signIn_button ${(props.onLoginPage === true) && (props.useFunc[0]===false)? "" : "hidden"}`} onClick={handleSignInClick}>Sign In</button>}
+                        <span className={`material-icons cursor-pointer ${props.onLoginPage ? "hidden" : ""}`}>notifications</span>
+                        <img
+                            src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/84c20033850498.56ba69ac290ea.png"
+                            alt="Profile"
+                            className={`profile-page-image cursor-pointer h-10 w-10 ${(props.onProfilePage || props.onLoginPage) ? "hidden" : ''}`}
+                            onClick={() => navigate("/profile")}
+                        />
+                        <button className={`signIn_button ${(props.onLoginPage && !props.useFunc[0]) ? "" : "hidden"}`} onClick={handleSignInClick}>Sign In</button>
                     </div>
                 </div>
             </div>
