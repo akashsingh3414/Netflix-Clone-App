@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 import Homepage from './components/Homepage';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LoginScreen from './components/LoginScreen';
-import { useDispatch } from 'react-redux';
-import { login, logout } from './features/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { login, logout, selectIsAuthenticated } from './features/userSlice';
 import ProfilePage from './components/ProfilePage';
 import Movies from './pages/Movies';
 import Tvshows from './pages/Tvshows';
@@ -13,26 +13,30 @@ import Searchpage from './components/Searchpage';
 
 function App() {
   const dispatch = useDispatch();
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const isAuthenticated = useSelector(selectIsAuthenticated);
 
   useEffect(() => {
+    localStorage.removeItem('user');
     const userAuth = JSON.parse(localStorage.getItem('user'));
+    
     if (userAuth) {
       dispatch(login({
         uid: userAuth.uid,
         email: userAuth.email,
       }));
-      setIsAuthenticated(true);
     } else {
       dispatch(logout());
-      setIsAuthenticated(false);
     }
   }, [dispatch]);
 
   return (
     <div className='App'>
       <Router>
-        {!isAuthenticated ? (<LoginScreen />) : (
+        {!isAuthenticated ? (
+          <Routes>
+            <Route path="/*" element={<LoginScreen />} />
+          </Routes>
+        ) : (
           <Routes>
             <Route path="/" element={<Homepage />} />
             <Route path="/profile" element={<ProfilePage />} />

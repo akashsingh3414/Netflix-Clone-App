@@ -8,7 +8,8 @@ function ProfilePage() {
   const user = useSelector(selectUser);
 
   const handleSignOut = () => {
-    console.log("Sign out");
+    localStorage.removeItem('user');
+    console.log("User signed out");
     window.location.href = '/login';
   };
 
@@ -23,7 +24,6 @@ function ProfilePage() {
             <div className="profile-page-text">
               <h2>Email: {user.email}</h2>
               <h2>UID: {user.uid}</h2>
-              <h2>Password: {user.password}</h2>
               <h2>Your plan: Basic</h2>
             </div>
             <button
