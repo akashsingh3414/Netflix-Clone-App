@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import "./Searchpage.css";
 import Navbar from './Navbar';
 import Cards from './Cards';
+import instance from '../hooks/axios';
 
 function useQuery() {
     return new URLSearchParams(useLocation().search);
@@ -11,7 +12,7 @@ function useQuery() {
 function Searchpage() {
     const query = useQuery();
     const searchQuery = query.get("query");
-    const url = `https://api.themoviedb.org/3/search/collection?query=${searchQuery}&include_adult=false&language=en-US&page=1`;
+    const url = `${instance.baseURL}/search/collection?query=${searchQuery}&include_adult=false&language=en-US&page=1`;
 
     return (
         <div className='searchpage'>

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import instance from '../hooks/axios.js'
 import "./Cards.css";
 
 const languageMap = {
@@ -20,7 +21,7 @@ const Cards = ({ title, type, category, searchURL }) => {
 
   useEffect(() => {
     const fetchData = () => {
-      const url = searchURL ? searchURL : `https://api.themoviedb.org/3/${type}/${category}?language=en-US`;
+      const url = searchURL ? searchURL : `${instance.baseURL}/${type}/${category}?language=en-US`;
       const options = {
         method: 'GET',
         headers: {
