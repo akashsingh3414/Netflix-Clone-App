@@ -1,5 +1,4 @@
-Netflix Clone App
-This project is built with Create React App and utilizes Redux for state management. Follow the steps below to set up and start using the app.
+Netflix Clone App, built with Create React App and utilizes Redux for state management. Follow the steps below to set up and start using the app.
 
 
 Prerequisites:
