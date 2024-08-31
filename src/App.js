@@ -4,7 +4,7 @@ import Homepage from './components/Homepage';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LoginScreen from './components/LoginScreen';
 import { useDispatch, useSelector } from 'react-redux';
-import { login, logout, selectIsAuthenticated } from './features/userSlice';
+import { login, logout, selectUser } from './features/userSlice';
 import ProfilePage from './components/ProfilePage';
 import Movies from './pages/Movies';
 import Tvshows from './pages/Tvshows';
@@ -13,7 +13,7 @@ import Searchpage from './components/Searchpage';
 
 function App() {
   const dispatch = useDispatch();
-  const isAuthenticated = useSelector(selectIsAuthenticated);
+  const userPresent = useSelector(selectUser);
 
   useEffect(() => {
     localStorage.removeItem('user');
@@ -32,7 +32,7 @@ function App() {
   return (
     <div className='App'>
       <Router>
-        {!isAuthenticated ? (
+        {!userPresent.uid ? (
           <Routes>
             <Route path="/*" element={<LoginScreen />} />
           </Routes>
