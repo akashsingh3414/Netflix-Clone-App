@@ -21,7 +21,7 @@ const Cards = ({ title, type, category, searchURL }) => {
 
   useEffect(() => {
     const fetchData = () => {
-      const url = searchURL ? searchURL : `${instance.baseURL}/${type}/${category}?language=en-US`;
+      const url = searchURL ? searchURL : `${instance.defaults.baseURL}/${type}/${category}?language=en-US`;
       const options = {
         method: 'GET',
         headers: {
