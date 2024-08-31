@@ -104,7 +104,6 @@ export default function Navbar(props) {
                         <button onClick={handleSearch} className="searchButton">
                             <span id="search" className={`material-icons cursor-pointer start center ${props.onLoginPage ? "hidden" : ""}`}>search</span>
                         </button>
-                        <span className={`material-icons cursor-pointer ${props.onLoginPage ? "hidden" : ""}`}>notifications</span>
                         <img
                             src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/84c20033850498.56ba69ac290ea.png"
                             alt="Profile"

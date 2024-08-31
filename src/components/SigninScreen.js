@@ -1,6 +1,5 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import './SigninScreen.css';
-import RegisterUser from './RegisterUser.js';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { login } from '../features/userSlice';
@@ -8,7 +7,6 @@ import { login } from '../features/userSlice';
 function SigninScreen(props) {
     const emailRef = useRef(null);
     const passwordRef = useRef(null);
-    const [newUser, setNewUser] = useState(false);
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -45,10 +43,7 @@ function SigninScreen(props) {
 
     return (
         <div className="SignupScreen">
-            {newUser ? (
-                <RegisterUser emailID={props.emailID} />
-            ) : (
-                <form className="form flex flex-col" onSubmit={signIn}>
+                            <form className="form flex flex-col" onSubmit={signIn}>
                     <h1 className='formTitle'>Sign In</h1>
                     <input 
                         ref={emailRef} 
@@ -65,17 +60,7 @@ function SigninScreen(props) {
                         required 
                     />
                     <button type="submit" className="formButton">Sign In</button>
-                    <h3 className='signupScreen_message'>
-                        <span className="signupScreen_gray">New to Netflix? </span>
-                        <span 
-                            className="signupScreen_link" 
-                            onClick={() => setNewUser(true)}
-                        >
-                            Sign up now.
-                        </span>
-                    </h3>
                 </form>
-            )}
         </div>
     );
 }
