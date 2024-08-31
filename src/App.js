@@ -3,7 +3,7 @@ import Homepage from './components/Homepage';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LoginScreen from './components/LoginScreen';
 import { useDispatch, useSelector } from 'react-redux';
-import { login, logout, selectUser } from './features/userSlice';
+import { logout, selectUser } from './features/userSlice';
 import ProfilePage from './components/ProfilePage';
 import Movies from './pages/Movies';
 import Tvshows from './pages/Tvshows';
@@ -15,15 +15,10 @@ function App() {
   const userPresent = useSelector(selectUser);
 
   useEffect(() => {
-    localStorage.removeItem('user');
+    localStorage.removeItem('user');  //removes any existing user from local storage
     const userAuth = JSON.parse(localStorage.getItem('user'));
-    
-    if (userAuth) {
-      dispatch(login({
-        uid: userAuth.uid,
-        email: userAuth.email,
-      }));
-    } else {
+
+    if (!userAuth) {
       dispatch(logout());
     }
   }, [dispatch]);
