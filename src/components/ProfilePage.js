@@ -23,7 +23,7 @@ function ProfilePage() {
           <div className="profile-page-details">
             <div className="profile-page-text">
               <h2>Email: {user.email}</h2>
-              <h2>UID: {user.uid}</h2>
+              <h2>User ID: {user.uid}</h2>
               <h2>Your plan: Basic</h2>
             </div>
             <button
