@@ -36,10 +36,6 @@ export default function Banner() {
         >
             <div className="banner_contents">
                 <h1 className="text-white-800 text-3xl font-bold px-4">{movie?.title || movie?.name || movie?.original_name || "Movie Loading ..."}</h1>
-                <div className="banner_buttons">
-                    <button className="banner_button">Play</button>
-                    <button className="banner_button">More Info</button>
-                </div>
                 <h1 className="banner_description pl-4">{truncateDescription(movie?.overview ? movie.overview : "Movie description loading ...", 150)}</h1>
             </div>
             <div className="banner_fadeBottom"></div>
