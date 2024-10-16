@@ -14,7 +14,7 @@ const languageMap = {
   af: "Afrikaans"
 };
 
-const apiKey = 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjZjRkNDhmZDkzMmE5YjhiNjIyZDFhOTgxMzEzNDQxMCIsIm5iZiI6MTcyMDE2MDE5NS40MjgxNjIsInN1YiI6IjY2ODE4MTkyZGM0YWQxMjM2OTQ3ZGJlNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.3sxeWhmZRYjoVQDG7d3fRK1BNw5JjUOz3FCDlRi5RU4';
+const apiKey = process.env.REACT_APP_BEARER_API_KEY;
 
 const Cards = ({ title, type, category, searchURL }) => {
   const [shows, setShows] = useState([]);
