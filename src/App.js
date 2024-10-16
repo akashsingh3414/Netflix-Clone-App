@@ -1,25 +1,25 @@
 import React, { useEffect } from 'react';
-import Homepage from './components/Homepage';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import LoginScreen from './components/LoginScreen';
 import { useDispatch, useSelector } from 'react-redux';
-import { logout, selectUser } from './features/userSlice';
+import Homepage from './components/Homepage';
+import LoginScreen from './components/LoginScreen';
 import ProfilePage from './components/ProfilePage';
 import Movies from './pages/Movies';
 import Tvshows from './pages/Tvshows';
 import Toprated from './pages/Toprated';
 import Searchpage from './components/Searchpage';
+import { selectUser, setUser, resetUser } from './features/userSlice';
 
 function App() {
   const dispatch = useDispatch();
   const userPresent = useSelector(selectUser);
 
   useEffect(() => {
-    localStorage.removeItem('user');  //removes any existing user from local storage
-    const userAuth = JSON.parse(localStorage.getItem('user'));
-
-    if (!userAuth) {
-      dispatch(logout());
+    const storedUser = JSON.parse(localStorage.getItem('user'));
+    if (storedUser) {
+      dispatch(setUser(storedUser));
+    } else {
+      dispatch(resetUser());
     }
   }, [dispatch]);
 

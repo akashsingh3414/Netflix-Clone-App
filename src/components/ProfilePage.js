@@ -1,16 +1,18 @@
 import React from 'react';
 import './ProfilePage.css';
 import Navbar from './Navbar';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { selectUser } from '../features/userSlice';
+import { logout } from '../features/userSlice';
 
 function ProfilePage() {
   const user = useSelector(selectUser);
+  const dispatch = useDispatch();
 
   const handleSignOut = () => {
+    dispatch(logout());
     localStorage.removeItem('user');
-    console.log("User signed out");
-    window.location.href = '/login';
+    window.location.href = '/';
   };
 
   return (
